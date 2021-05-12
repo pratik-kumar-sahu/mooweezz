@@ -26,6 +26,14 @@ function LeftContainer() {
               src={IMAGES + movie.poster_path}
               alt={movie.title}
             />
+            <div className="left-container__movies--hover">
+              <div className="left-container__movies--hover-title">
+                {movie.title}
+              </div>
+              <div className="left-container__movies--hover-rating">
+                {movie.vote_average}
+              </div>
+            </div>
           </div>
         ))}
     </div>
