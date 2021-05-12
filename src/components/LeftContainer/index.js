@@ -27,12 +27,9 @@ function LeftContainer() {
               alt={movie.title}
             />
             <div className="left-container__movies--hover">
-              <div className="left-container__movies--hover-title">
-                {movie.title}
-              </div>
-              <div className="left-container__movies--hover-rating">
-                {movie.vote_average}
-              </div>
+              {/* <div>{movie.title}</div>
+              <div>{movie.vote_average}</div> */}
+              <div>{movie.overview}</div>
             </div>
           </div>
         ))}
