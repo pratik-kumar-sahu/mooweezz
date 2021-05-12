@@ -1,0 +1,24 @@
+.main-container {
+  width: 120rem;
+  height: 55rem;
+  background-color: white;
+  margin: 5rem auto;
+  border-radius: 2rem;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-container {
+  width: 69%;
+  height: 100%;
+  background-color: orangered;
+  border-radius: 1rem;
+}
+
+.right-container {
+  width: 29%;
+  height: 100%;
+  background-color: orchid;
+  border-radius: 1rem;
+}
