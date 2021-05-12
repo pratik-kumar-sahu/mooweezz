@@ -12,8 +12,29 @@
 .left-container {
   width: 69%;
   height: 100%;
-  background-color: orangered;
+  padding: 1rem 0.5rem 0.5rem 0.5rem;
   border-radius: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  overflow-y: scroll;
+  background-color: orangered;
+
+  &__movies {
+    width: 148px;
+    height: 180px;
+    border-radius: 1rem;
+    margin: 0 0.5rem 1rem 0.5rem;
+    background-color: firebrick;
+
+    &--cover {
+      width: 100%;
+      height: 100%;
+      border-radius: 1rem;
+      object-fit: cover;
+      overflow: hidden;
+    }
+  }
 }
 
 .right-container {
