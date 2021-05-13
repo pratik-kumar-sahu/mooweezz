@@ -26,10 +26,23 @@ function LeftContainer() {
               src={IMAGES + movie.poster_path}
               alt={movie.title}
             />
+            <div className="left-container__movies--info">
+              <h3>
+                {movie.title.length > 10
+                  ? movie.title.substring(0, 10) + "..."
+                  : movie.title}
+              </h3>
+              <h3 className="left-container__movies--info-rating">
+                {movie.vote_average}
+              </h3>
+            </div>
             <div className="left-container__movies--hover">
-              {/* <div>{movie.title}</div>
-              <div>{movie.vote_average}</div> */}
-              <div>{movie.overview}</div>
+              <div>
+                <div className="left-container__movies--hover-title">
+                  {movie.title}
+                </div>
+                “<em>{movie.overview}</em>”
+              </div>
             </div>
           </div>
         ))}
