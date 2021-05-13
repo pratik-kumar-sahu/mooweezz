@@ -1,29 +1,28 @@
-import React, { useEffect, useState } from "react";
-import { API_KEY } from "../../keys";
+import React from "react";
 
-function LeftContainer() {
-  const [movies, setMovies] = useState([]);
-
-  const MOVIES_API = `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=${API_KEY}&page=1`;
-  const IMAGES = "https://image.tmdb.org/t/p/w1280";
-
-  useEffect(() => {
-    fetch(MOVIES_API)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data.results);
-        setMovies(data.results);
-      });
-  }, [MOVIES_API]);
+function LeftContainer({ movies, IMAGE_PATH }) {
+  const setColors = (vote) => {
+    if (vote >= 8) {
+      return "green";
+    } else if (vote >= 6) {
+      return "orange";
+    } else {
+      return "red";
+    }
+  };
 
   return (
     <div className="left-container">
-      {movies.length &&
+      {movies &&
         movies.map((movie) => (
           <div key={movie.id} className="left-container__movies">
             <img
               className="left-container__movies--cover"
-              src={IMAGES + movie.poster_path}
+              src={
+                movie.poster_path
+                  ? IMAGE_PATH + movie.poster_path
+                  : "https://images.unsplash.com/photo-1535016120720-40c646be5580?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
+              }
               alt={movie.title}
             />
             <div className="left-container__movies--info">
@@ -32,7 +31,11 @@ function LeftContainer() {
                   ? movie.title.substring(0, 10) + "..."
                   : movie.title}
               </h3>
-              <h3 className="left-container__movies--info-rating">
+              <h3
+                className={`left-container__movies--info-rating ${setColors(
+                  movie.vote_average
+                )}`}
+              >
                 {movie.vote_average}
               </h3>
             </div>
