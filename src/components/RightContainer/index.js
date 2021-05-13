@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { API_KEY } from "../../keys";
 
 function RightContainer({ setMovies }) {
   const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("popular");
 
   const SEARCH_API = `https://api.themoviedb.org/3/search/movie?&api_key=${API_KEY}&query=`;
   const MOVIES_API = `https://api.themoviedb.org/3/movie/${category}?api_key=${API_KEY}&language=en-US&page=1`;
 
-  const fetcHMovies = (input) => {
+  useEffect(() => {
+    fetchMovies(MOVIES_API);
+  }, [category]);
+
+  const fetchMovies = (input) => {
     fetch(input)
       .then((res) => res.json())
       .then((data) => {
@@ -19,18 +23,14 @@ function RightContainer({ setMovies }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (search.trim()) {
-      fetcHMovies(SEARCH_API + search);
+      fetchMovies(SEARCH_API + search);
     }
-
     setSearch("");
   };
 
   const categoryHandler = (e) => {
     setCategory(e.target.value);
-    console.log(category);
-    fetcHMovies(MOVIES_API);
   };
 
   return (
@@ -45,16 +45,12 @@ function RightContainer({ setMovies }) {
         />
       </form>
 
-      {/* <form onChange={(e) => categoryHandler(e)}> */}
-      <label>Select a category:</label>
-      <select name="movies" id="movies" onChange={categoryHandler}>
+      <select className="right-container__dropdown" onChange={categoryHandler}>
         <option value="popular">Popularity</option>
         <option value="top_rated">Top Rated</option>
-        <option value="latest">Latest</option>
         <option value="upcoming">Upcoming</option>
-        <option value="now_playing">Now Playing</option>
+        <option value="now_playing">On Cinemas</option>
       </select>
-      {/* </form> */}
     </div>
   );
 }

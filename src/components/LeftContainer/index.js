@@ -13,7 +13,7 @@ function LeftContainer({ movies, IMAGE_PATH }) {
 
   return (
     <div className="left-container">
-      {movies &&
+      {movies.length > 0 ? (
         movies.map((movie) => (
           <div key={movie.id} className="left-container__movies">
             <img
@@ -48,7 +48,12 @@ function LeftContainer({ movies, IMAGE_PATH }) {
               </div>
             </div>
           </div>
-        ))}
+        ))
+      ) : (
+        <div style={{ color: "white", fontSize: "1.6rem" }}>
+          No movies found
+        </div>
+      )}
     </div>
   );
 }
