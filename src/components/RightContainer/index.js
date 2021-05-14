@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { API_KEY } from "../../keys";
 
-function RightContainer({ setMovies }) {
+function RightContainer({ setMovies, page, setPage }) {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("popular");
 
   const SEARCH_API = `https://api.themoviedb.org/3/search/movie?&api_key=${API_KEY}&query=`;
-  const MOVIES_API = `https://api.themoviedb.org/3/movie/${category}?api_key=${API_KEY}&language=en-US&page=1`;
+  const MOVIES_API = `https://api.themoviedb.org/3/movie/${category}?api_key=${API_KEY}&language=en-US&page=${page}`;
 
   useEffect(() => {
     fetchMovies(MOVIES_API);
-  }, [category]);
+  }, [category, page]);
 
   const fetchMovies = (input) => {
     fetch(input)
@@ -31,6 +31,15 @@ function RightContainer({ setMovies }) {
 
   const categoryHandler = (e) => {
     setCategory(e.target.value);
+    setPage(1);
+  };
+
+  const prevPage = () => {
+    page > 1 && setPage(page - 1);
+  };
+
+  const nextPage = () => {
+    page < 5 && setPage(page + 1);
   };
 
   return (
@@ -45,12 +54,22 @@ function RightContainer({ setMovies }) {
         />
       </form>
 
-      <select className="right-container__dropdown" onChange={categoryHandler}>
-        <option value="popular">Popularity</option>
-        <option value="top_rated">Top Rated</option>
-        <option value="upcoming">Upcoming</option>
-        <option value="now_playing">On Cinemas</option>
-      </select>
+      <div className="dropdown-and-pagination">
+        <select
+          className="right-container__dropdown"
+          onChange={categoryHandler}
+        >
+          <option value="popular">Popularity</option>
+          <option value="top_rated">Top Rated</option>
+          <option value="upcoming">Upcoming</option>
+          <option value="now_playing">On Cinemas</option>
+        </select>
+
+        <div className="right-container__pagination">
+          <button onClick={prevPage}>❮ Prev</button>
+          <button onClick={nextPage}>Next ❯</button>
+        </div>
+      </div>
     </div>
   );
 }

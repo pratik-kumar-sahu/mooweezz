@@ -136,7 +136,7 @@
   width: 29%;
   height: 100%;
   padding: 1rem;
-  background-color: orchid;
+  background-color: rgba(255, 166, 0, 0.8);
   border-radius: 1rem;
 
   &__search {
@@ -149,11 +149,33 @@
   }
 
   &__dropdown {
-    margin-top: 1rem;
     padding: 1rem;
     border-radius: 0.5rem;
     border-style: none;
     outline-style: none;
+  }
+
+  &__pagination {
+    & button {
+      padding: 1rem;
+      background-color: var(--white);
+      border-style: none;
+      cursor: pointer;
+
+      &:first-child {
+        border-top-left-radius: 0.5rem;
+        border-bottom-left-radius: 0.5rem;
+      }
+
+      &:last-child {
+        border-top-right-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+      }
+
+      &:hover {
+        background-color: var(--gray-light);
+      }
+    }
   }
 }
 
@@ -178,4 +200,11 @@
 .red {
   color: red;
   border-bottom: 2px solid red;
+}
+
+.dropdown-and-pagination {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
 }
