@@ -21,7 +21,12 @@ function App() {
   return (
     <div className="main-container">
       <LeftContainer movies={movies} IMAGE_PATH={IMAGES} />
-      <RightContainer setMovies={setMovies} page={page} setPage={setPage} />
+      <RightContainer
+        movies={movies}
+        setMovies={setMovies}
+        page={page}
+        setPage={setPage}
+      />
     </div>
   );
 }

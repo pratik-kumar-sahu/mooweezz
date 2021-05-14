@@ -4,6 +4,7 @@ import { API_KEY } from "../../keys";
 function RightContainer({ setMovies, page, setPage }) {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("popular");
+  const [totalPages, setTotalPages] = useState(null);
 
   const SEARCH_API = `https://api.themoviedb.org/3/search/movie?&api_key=${API_KEY}&query=`;
   const MOVIES_API = `https://api.themoviedb.org/3/movie/${category}?api_key=${API_KEY}&language=en-US&page=${page}`;
@@ -18,6 +19,7 @@ function RightContainer({ setMovies, page, setPage }) {
       .then((data) => {
         console.log(data);
         setMovies(data.results);
+        setTotalPages(data.total_pages);
       });
   };
 
@@ -39,7 +41,8 @@ function RightContainer({ setMovies, page, setPage }) {
   };
 
   const nextPage = () => {
-    page < 5 && setPage(page + 1);
+    console.log(totalPages);
+    page < totalPages && setPage(page + 1);
   };
 
   return (
