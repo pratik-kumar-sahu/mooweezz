@@ -45,6 +45,35 @@
   overflow-y: scroll;
   background-color: var(--primary-dark);
 
+  &__main {
+    height: 50vh;
+    width: 100%;
+    background-color: var(--white);
+    border-radius: 1rem;
+    overflow: hidden;
+    margin: 0 0.5rem 2rem 0.5rem;
+    display: flex;
+
+    &--cover {
+      height: 100%;
+    }
+
+    &--extra {
+      padding: 1rem;
+      font-size: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+
+      &-reviews {
+        width: 100%;
+        height: 100%;
+        margin-top: 1rem;
+        overflow: scroll;
+      }
+    }
+  }
+
   &__movies {
     width: 142px;
     height: 220px;
@@ -207,4 +236,29 @@
   display: flex;
   justify-content: space-between;
   align-items: stretch;
+}
+
+.reviews {
+  font-size: 1.3rem;
+  padding: 1rem;
+
+  &-author {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    padding: 0.2rem 0.6rem;
+    color: var(--white);
+    background-color: var(--gray-dark);
+  }
+
+  &-content {
+    width: auto;
+    padding-left: 0.5rem;
+    border-left: 2px solid var(--gray-dark);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .left-container__main {
+    height: 30vh;
+  }
 }
