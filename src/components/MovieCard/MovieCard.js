@@ -1,6 +1,8 @@
 import React from "react";
 
-function MovieCard({ movie, IMAGE_PATH, movies, setSelectedMovie }) {
+function MovieCard({ movie, movies, setSelectedMovie }) {
+  const IMAGE_PATH = "https://image.tmdb.org/t/p/w1280";
+
   const setColors = (vote) => {
     if (vote >= 8) {
       return "green";
@@ -16,7 +18,11 @@ function MovieCard({ movie, IMAGE_PATH, movies, setSelectedMovie }) {
   };
 
   return (
-    <div key={movie.id} className="left-container__movies">
+    <div
+      key={movie.id}
+      onClick={() => clickHandler(movie.id)}
+      className="left-container__movies"
+    >
       <img
         className="left-container__movies--cover"
         src={
@@ -26,10 +32,7 @@ function MovieCard({ movie, IMAGE_PATH, movies, setSelectedMovie }) {
         }
         alt={movie.title}
       />
-      <div
-        onClick={() => clickHandler(movie.id)}
-        className="left-container__movies--info"
-      >
+      <div className="left-container__movies--info">
         <h3>
           {movie.title.length > 10
             ? movie.title.substring(0, 10) + "..."

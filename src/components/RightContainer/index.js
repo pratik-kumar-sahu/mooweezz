@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { UserContext } from "../../contexts/UserContext";
 import { API_KEY } from "../../keys";
+import FavouriteCard from "../FavouriteCard/FavouriteCard";
 
 function RightContainer({ setMovies, page, setPage }) {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("popular");
   const [totalPages, setTotalPages] = useState(null);
+  const { favourites, dispatch } = useContext(UserContext);
 
   const SEARCH_API = `https://api.themoviedb.org/3/search/movie?&api_key=${API_KEY}&query=`;
   const MOVIES_API = `https://api.themoviedb.org/3/movie/${category}?api_key=${API_KEY}&language=en-US&page=${page}`;
@@ -41,7 +44,6 @@ function RightContainer({ setMovies, page, setPage }) {
   };
 
   const nextPage = () => {
-    console.log(totalPages);
     page < totalPages && setPage(page + 1);
   };
 
@@ -72,6 +74,17 @@ function RightContainer({ setMovies, page, setPage }) {
           <button onClick={prevPage}>❮ Prev</button>
           <button onClick={nextPage}>Next ❯</button>
         </div>
+      </div>
+
+      <div style={{ fontSize: "1.5rem", fontWeight: "700" }}>Favourites</div>
+      <div className="right-container__favourites">
+        {favourites.length ? (
+          favourites.map((favourite) => (
+            <FavouriteCard key={favourite.id} movie={favourite.data} />
+          ))
+        ) : (
+          <div>No favourite movies to show 😐</div>
+        )}
       </div>
     </div>
   );

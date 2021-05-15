@@ -67,7 +67,6 @@ function LeftContainer({ movies }) {
           <MovieCard
             key={movie.id}
             movie={movie}
-            IMAGE_PATH={IMAGE_PATH}
             movies={movies}
             setSelectedMovie={setSelectedMovie}
           />
