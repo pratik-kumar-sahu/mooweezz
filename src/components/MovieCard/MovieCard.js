@@ -19,6 +19,7 @@ function MovieCard({ movie, movies, setSelectedMovie }) {
 
   return (
     <div
+      id="movie-btn"
       key={movie.id}
       onClick={() => clickHandler(movie.id)}
       className="left-container__movies"

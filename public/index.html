@@ -9,5 +9,15 @@
   </head>
   <body>
     <div id="root"></div>
+
+    <script>
+      document
+        .getElementById("movie-btn")
+        .addEventListener("click", function () {
+          document
+            .getElementById("left-container")
+            .scroll({ top: 0, behavior: "smooth" });
+        });
+    </script>
   </body>
 </html>

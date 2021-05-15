@@ -65,8 +65,19 @@
       flex-direction: column;
       flex: 1;
 
+      &-add {
+        margin: 0.5rem 1rem;
+
+        &--btn {
+          padding: 0.5rem 0.7rem;
+          border-style: none;
+          outline-style: none;
+          cursor: pointer;
+          background-color: var(--gray-light);
+        }
+      }
+
       &-reviews {
-        width: 100%;
         height: 100%;
         margin-top: 1rem;
         overflow: scroll;

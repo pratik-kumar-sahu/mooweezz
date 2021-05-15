@@ -3,9 +3,8 @@ import { UserContext } from "../../contexts/UserContext";
 import { API_KEY } from "../../keys";
 import MovieCard from "../MovieCard/MovieCard";
 
-function LeftContainer({ movies }) {
+function LeftContainer({ movies, selectedMovie, setSelectedMovie }) {
   const { favourites, dispatch } = useContext(UserContext);
-  const [selectedMovie, setSelectedMovie] = useState("");
   const [reviews, setReviews] = useState(null);
 
   const REVIEWS_API = `https://api.themoviedb.org/3/movie/${selectedMovie.id}/reviews?api_key=${API_KEY}&language=en-US&page=1`;
@@ -18,6 +17,11 @@ function LeftContainer({ movies }) {
         .then((data) => setReviews(data.results));
   }, [selectedMovie]);
 
+  // const scrollOnTop = () => {
+  //   const myDiv = document.getElementById("left-container");
+  //   myDiv.scrollTop = 0;
+  // };
+
   const favouriteHandler = (id) => {
     const foundMovie = favourites.filter((favourite) => favourite.id === id);
     // console.log(foundMovie);
@@ -29,7 +33,7 @@ function LeftContainer({ movies }) {
   };
 
   return (
-    <div className="left-container">
+    <div id="left-container" className="left-container">
       {selectedMovie ? (
         <div className="left-container__main">
           <img
@@ -42,9 +46,16 @@ function LeftContainer({ movies }) {
             }
           />
           <div className="left-container__main--extra">
-            <button onClick={() => favouriteHandler(selectedMovie.id)}>
-              ❤️
-            </button>
+            <div className="left-container__main--extra-add">
+              <button
+                className="left-container__main--extra-add--btn"
+                onClick={() => favouriteHandler(selectedMovie.id)}
+              >
+                {favourites.filter((e) => e.data.id === selectedMovie.id).length
+                  ? "Remove ❤️"
+                  : "Add ❤️"}
+              </button>
+            </div>
             <div className="left-container__main--extra-reviews">
               <div style={{ marginLeft: "1rem" }}>
                 Reviews 👉 {reviews && reviews.length}
@@ -69,6 +80,7 @@ function LeftContainer({ movies }) {
             movie={movie}
             movies={movies}
             setSelectedMovie={setSelectedMovie}
+            // onClick={scrollOnTop}
           />
         ))
       ) : (

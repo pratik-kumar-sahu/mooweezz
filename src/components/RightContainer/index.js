@@ -3,11 +3,17 @@ import { UserContext } from "../../contexts/UserContext";
 import { API_KEY } from "../../keys";
 import FavouriteCard from "../FavouriteCard/FavouriteCard";
 
-function RightContainer({ setMovies, page, setPage }) {
+function RightContainer({
+  movies,
+  setMovies,
+  page,
+  setPage,
+  setSelectedMovie,
+}) {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("popular");
   const [totalPages, setTotalPages] = useState(null);
-  const { favourites, dispatch } = useContext(UserContext);
+  const { favourites } = useContext(UserContext);
 
   const SEARCH_API = `https://api.themoviedb.org/3/search/movie?&api_key=${API_KEY}&query=`;
   const MOVIES_API = `https://api.themoviedb.org/3/movie/${category}?api_key=${API_KEY}&language=en-US&page=${page}`;
@@ -32,19 +38,23 @@ function RightContainer({ setMovies, page, setPage }) {
       fetchMovies(SEARCH_API + search);
     }
     setSearch("");
+    setSelectedMovie("");
   };
 
   const categoryHandler = (e) => {
     setCategory(e.target.value);
     setPage(1);
+    setSelectedMovie("");
   };
 
   const prevPage = () => {
     page > 1 && setPage(page - 1);
+    setSelectedMovie("");
   };
 
   const nextPage = () => {
     page < totalPages && setPage(page + 1);
+    setSelectedMovie("");
   };
 
   return (
@@ -72,6 +82,10 @@ function RightContainer({ setMovies, page, setPage }) {
 
         <div className="right-container__pagination">
           <button onClick={prevPage}>❮ Prev</button>
+          <span style={{ fontSize: "1.5rem", fontWeight: "700" }}>
+            {" "}
+            {page}{" "}
+          </span>
           <button onClick={nextPage}>Next ❯</button>
         </div>
       </div>
@@ -80,7 +94,13 @@ function RightContainer({ setMovies, page, setPage }) {
       <div className="right-container__favourites">
         {favourites.length ? (
           favourites.map((favourite) => (
-            <FavouriteCard key={favourite.id} movie={favourite.data} />
+            <FavouriteCard
+              movies={movies}
+              setSelectedMovie={setSelectedMovie}
+              key={favourite.id}
+              favMovie={favourite.data}
+              movie
+            />
           ))
         ) : (
           <div>No favourite movies to show 😐</div>
