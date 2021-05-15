@@ -2,11 +2,15 @@
   width: 120rem;
   height: 55rem;
   background-color: white;
-  margin: 5rem auto;
+  margin: 0 auto;
   border-radius: 2rem;
   padding: 2rem;
   display: flex;
   justify-content: space-between;
+}
+
+.dummy {
+  height: 5rem;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -14,6 +18,10 @@
     width: 98rem;
     height: 95vh;
     margin: 2rem auto;
+  }
+
+  .dummy {
+    height: 0.2rem;
   }
 }
 
@@ -31,6 +39,10 @@
     margin: 0;
     padding: 0;
     flex-direction: column-reverse;
+  }
+
+  .dummy {
+    display: none;
   }
 }
 
@@ -90,7 +102,6 @@
     height: 220px;
     border-radius: 1rem;
     margin: 0 0.5rem 1rem 0.5rem;
-    cursor: pointer;
     position: relative;
     overflow: hidden;
     display: flex;
@@ -119,11 +130,8 @@
       padding: 1rem;
       justify-content: space-between;
       align-items: center;
+      cursor: pointer;
       background-color: var(--gray-light);
-
-      // &-rating {
-      //   border-bottom: 2px solid var(--gray-dark);
-      // }
     }
 
     &--hover {
@@ -178,6 +186,8 @@
   padding: 1rem;
   background-color: rgba(255, 166, 0, 0.8);
   border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
 
   &__search {
     width: 100%;
@@ -193,6 +203,7 @@
     border-radius: 0.5rem;
     border-style: none;
     outline-style: none;
+    background-color: var(--white);
   }
 
   &__pagination {

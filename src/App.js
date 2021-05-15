@@ -10,22 +10,25 @@ function App() {
   const [selectedMovie, setSelectedMovie] = useState("");
 
   return (
-    <div className="main-container">
-      <UserContextProvider>
-        <LeftContainer
-          movies={movies}
-          selectedMovie={selectedMovie}
-          setSelectedMovie={setSelectedMovie}
-        />
-        <RightContainer
-          movies={movies}
-          setMovies={setMovies}
-          page={page}
-          setPage={setPage}
-          setSelectedMovie={setSelectedMovie}
-        />
-      </UserContextProvider>
-    </div>
+    <>
+      <div className="dummy"></div>
+      <div className="main-container">
+        <UserContextProvider>
+          <LeftContainer
+            movies={movies}
+            selectedMovie={selectedMovie}
+            setSelectedMovie={setSelectedMovie}
+          />
+          <RightContainer
+            movies={movies}
+            setMovies={setMovies}
+            page={page}
+            setPage={setPage}
+            setSelectedMovie={setSelectedMovie}
+          />
+        </UserContextProvider>
+      </div>
+    </>
   );
 }
 

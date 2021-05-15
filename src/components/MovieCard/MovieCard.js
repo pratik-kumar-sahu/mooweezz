@@ -1,6 +1,6 @@
 import React from "react";
 
-function MovieCard({ movie, movies, setSelectedMovie }) {
+function MovieCard({ movie, movies, setSelectedMovie, scrollOnTop }) {
   const IMAGE_PATH = "https://image.tmdb.org/t/p/w1280";
 
   const setColors = (vote) => {
@@ -15,13 +15,14 @@ function MovieCard({ movie, movies, setSelectedMovie }) {
 
   const clickHandler = (id) => {
     setSelectedMovie(movies.filter((movie) => movie.id === id)[0]);
+    scrollOnTop();
   };
 
   return (
     <div
       id="movie-btn"
       key={movie.id}
-      onClick={() => clickHandler(movie.id)}
+      // onClick={() => clickHandler(movie.id)}
       className="left-container__movies"
     >
       <img
@@ -33,7 +34,10 @@ function MovieCard({ movie, movies, setSelectedMovie }) {
         }
         alt={movie.title}
       />
-      <div className="left-container__movies--info">
+      <div
+        onClick={() => clickHandler(movie.id)}
+        className="left-container__movies--info"
+      >
         <h3>
           {movie.title.length > 10
             ? movie.title.substring(0, 10) + "..."

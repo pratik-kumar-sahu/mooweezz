@@ -26,7 +26,6 @@ function RightContainer({
     fetch(input)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setMovies(data.results);
         setTotalPages(data.total_pages);
       });

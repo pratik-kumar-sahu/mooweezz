@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { API_KEY } from "../../keys";
 import MovieCard from "../MovieCard/MovieCard";
@@ -6,6 +6,7 @@ import MovieCard from "../MovieCard/MovieCard";
 function LeftContainer({ movies, selectedMovie, setSelectedMovie }) {
   const { favourites, dispatch } = useContext(UserContext);
   const [reviews, setReviews] = useState(null);
+  const dummy = useRef();
 
   const REVIEWS_API = `https://api.themoviedb.org/3/movie/${selectedMovie.id}/reviews?api_key=${API_KEY}&language=en-US&page=1`;
   const IMAGE_PATH = "https://image.tmdb.org/t/p/w1280";
@@ -17,14 +18,16 @@ function LeftContainer({ movies, selectedMovie, setSelectedMovie }) {
         .then((data) => setReviews(data.results));
   }, [selectedMovie]);
 
-  // const scrollOnTop = () => {
-  //   const myDiv = document.getElementById("left-container");
-  //   myDiv.scrollTop = 0;
-  // };
+  const scrollOnTop = () => {
+    if (dummy.current) {
+      dummy.current.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+  };
 
   const favouriteHandler = (id) => {
     const foundMovie = favourites.filter((favourite) => favourite.id === id);
-    // console.log(foundMovie);
     if (foundMovie.length === 0) {
       dispatch({ type: "ADD_FAV", favourite: { ...selectedMovie } });
     } else {
@@ -35,7 +38,7 @@ function LeftContainer({ movies, selectedMovie, setSelectedMovie }) {
   return (
     <div id="left-container" className="left-container">
       {selectedMovie ? (
-        <div className="left-container__main">
+        <div className="left-container__main" ref={dummy}>
           <img
             className="left-container__main--cover"
             alt={selectedMovie.title}
@@ -80,7 +83,7 @@ function LeftContainer({ movies, selectedMovie, setSelectedMovie }) {
             movie={movie}
             movies={movies}
             setSelectedMovie={setSelectedMovie}
-            // onClick={scrollOnTop}
+            scrollOnTop={scrollOnTop}
           />
         ))
       ) : (

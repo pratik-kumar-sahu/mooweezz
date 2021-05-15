@@ -10,7 +10,6 @@ function UserContextProvider(props) {
   });
 
   useEffect(() => {
-    console.log(favourites);
     localStorage.setItem("favourites", JSON.stringify(favourites));
   }, [favourites]);
 
