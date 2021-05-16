@@ -63,10 +63,11 @@
     background-color: var(--white);
     border-radius: 1rem;
     overflow: hidden;
-    margin: 0 0.5rem 2rem 0.5rem;
+    margin: 0 0.5rem 1rem 0.5rem;
     display: flex;
 
     &--cover {
+      max-width: 30rem;
       height: 100%;
     }
 
@@ -93,6 +94,69 @@
         height: 100%;
         margin-top: 1rem;
         overflow: scroll;
+      }
+    }
+  }
+
+  &__recommends {
+    width: 100%;
+    margin: 0 0 1rem 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+
+    & > h3 {
+      position: absolute;
+      letter-spacing: 1.5px;
+      color: var(--white);
+      top: 35px;
+      left: -25px;
+      transform: rotateZ(-90deg);
+    }
+
+    & > div {
+      padding: 0.6rem;
+      margin-left: 3rem;
+      margin-right: 0.5rem;
+      border-radius: 0.5rem;
+      font-size: 1.4rem;
+      display: flex;
+      overflow: hidden;
+      overflow-x: scroll;
+      overflow-y: scroll;
+      background-color: var(--white);
+
+      &::-webkit-scrollbar {
+        height: 5px !important;
+        width: 5px !important;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: rgba(255, 166, 0, 0.8) !important;
+        border-radius: 0.5rem !important;
+      }
+
+      & .favourite-card {
+        display: inline-block;
+        min-width: 7rem;
+        max-width: 7rem;
+        min-height: 7rem;
+        max-height: 7rem;
+        border-radius: 1rem;
+        cursor: pointer;
+
+        &:not(:last-child) {
+          margin-right: 0.5rem;
+        }
+
+        &--cover {
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+          border-radius: 1rem;
+          overflow: hidden;
+        }
       }
     }
   }
@@ -171,6 +235,11 @@
     height: auto;
     border-radius: 0;
     justify-content: space-around;
+
+    &__main--cover {
+      max-width: 15rem;
+      height: 100%;
+    }
   }
 }
 
@@ -319,7 +388,7 @@
   max-height: 10rem;
   border-radius: 1rem;
   cursor: pointer;
-  background-color: orangered;
+  background-color: rgba(255, 166, 0, 0.8);
 
   &:not(:last-child) {
     margin-right: 1rem;
@@ -332,4 +401,8 @@
     border-radius: 1rem;
     overflow: hidden;
   }
+}
+
+.hide-it {
+  width: 100%;
 }
