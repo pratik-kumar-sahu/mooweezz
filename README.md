@@ -1,3 +1,6 @@
+LINK: https://mooweezz.netlify.app/ 
+and write more about tech stacks used here.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
